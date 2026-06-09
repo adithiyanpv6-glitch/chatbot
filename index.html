@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LangChain Groq Chatbot</title>
-  <meta name="description" content="A sleek stateless AI chatbot powered by LangChain and Groq (Llama 3.3)." />
+  <title>ERA Chatbot</title>
+  <meta name="description" content="ERA Chatbot — a professional AI assistant powered by Groq and LangChain." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
@@ -13,18 +13,18 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #0d0f1a;
-      --surface:   #141727;
-      --surface2:  #1c2038;
-      --border:    rgba(255,255,255,.07);
-      --accent:    #7c5cfc;
-      --accent2:   #5c8dfc;
-      --user-bg:   linear-gradient(135deg,#7c5cfc,#5c8dfc);
-      --bot-bg:    #1c2038;
-      --text:      #e8eaf6;
-      --muted:     #7b82a8;
-      --radius:    18px;
-      --shadow:    0 8px 40px rgba(0,0,0,.5);
+      --bg:        #000000;
+      --surface:   #0a0a0a;
+      --surface2:  #151515;
+      --border:    rgba(255,255,255,.08);
+      --accent:    #a0a0a0;
+      --accent2:   #c8c8c8;
+      --user-bg:   linear-gradient(135deg,#2a2a2a,#3a3a3a);
+      --bot-bg:    #111111;
+      --text:      #e5e5e5;
+      --muted:     #6b6b6b;
+      --radius:    16px;
+      --shadow:    0 8px 40px rgba(0,0,0,.7);
     }
 
     html, body {
@@ -41,8 +41,8 @@
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(ellipse 60% 40% at 20% 10%, rgba(124,92,252,.18) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 35% at 80% 85%, rgba(92,141,252,.15) 0%, transparent 60%);
+        radial-gradient(ellipse 60% 40% at 20% 10%, rgba(255,255,255,.03) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 35% at 80% 85%, rgba(255,255,255,.02) 0%, transparent 60%);
       pointer-events: none;
       z-index: 0;
     }
@@ -71,10 +71,14 @@
     .logo {
       width: 44px; height: 44px;
       border-radius: 12px;
-      background: var(--user-bg);
+      background: linear-gradient(135deg,#1a1a1a,#2d2d2d);
+      border: 1px solid rgba(255,255,255,.1);
       display: flex; align-items: center; justify-content: center;
-      font-size: 22px;
-      box-shadow: 0 4px 20px rgba(124,92,252,.4);
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -.02em;
+      box-shadow: 0 4px 20px rgba(0,0,0,.5);
       flex-shrink: 0;
     }
 
@@ -83,9 +87,9 @@
 
     .badge {
       margin-left: auto;
-      background: rgba(124,92,252,.15);
-      border: 1px solid rgba(124,92,252,.35);
-      color: #a98cff;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #999;
       font-size: .68rem;
       font-weight: 600;
       padding: 4px 10px;
@@ -143,9 +147,10 @@
     }
     .msg.user .bubble {
       background: var(--user-bg);
-      color: #fff;
+      color: #e5e5e5;
       border-bottom-right-radius: 4px;
-      box-shadow: 0 4px 20px rgba(124,92,252,.35);
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: 0 4px 20px rgba(0,0,0,.4);
     }
     .msg.bot .bubble {
       background: var(--bot-bg);
@@ -192,7 +197,7 @@
     }
     #empty-state .icon {
       font-size: 48px;
-      filter: drop-shadow(0 0 20px rgba(124,92,252,.4));
+      filter: drop-shadow(0 0 20px rgba(255,255,255,.15));
     }
     #empty-state h2 { font-size: 1.3rem; color: var(--text); font-weight: 600; }
     #empty-state p  { font-size: .85rem; max-width: 340px; line-height: 1.6; }
@@ -213,9 +218,9 @@
       transition: all .2s;
     }
     .chip:hover {
-      background: rgba(124,92,252,.2);
-      border-color: var(--accent);
-      color: #c4b5fd;
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.2);
+      color: #fff;
     }
 
     /* ── Input bar ──────────────────────────────────────────────────────── */
@@ -235,8 +240,8 @@
       transition: border-color .2s, box-shadow .2s;
     }
     #input-row:focus-within {
-      border-color: rgba(124,92,252,.5);
-      box-shadow: 0 0 0 3px rgba(124,92,252,.12);
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 0 0 3px rgba(255,255,255,.04);
     }
 
     #user-input {
@@ -284,9 +289,9 @@
       padding: 6px 0 0;
     }
     .notice span {
-      background: rgba(255,200,80,.08);
-      border: 1px solid rgba(255,200,80,.18);
-      color: #f5c542;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      color: #777;
       padding: 3px 10px;
       border-radius: 99px;
     }
@@ -314,20 +319,20 @@
 <div id="app">
   <!-- Header -->
   <header>
-    <div class="logo">🤖</div>
+    <div class="logo">E</div>
     <div class="header-text">
-      <h1>LangChain + Groq</h1>
-      <p>Llama 3.3 70B &middot; Ultra-fast inference</p>
+      <h1>ERA Chatbot</h1>
+      <p>Powered by Groq &middot; Llama 3.3 70B</p>
     </div>
-    <div class="badge">No Memory</div>
+    <div class="badge">Stateless</div>
   </header>
 
   <!-- Messages -->
   <div id="messages">
     <div id="empty-state">
-      <div class="icon">✨</div>
-      <h2>Start a conversation</h2>
-      <p>Powered by <strong>Groq</strong> &amp; Llama 3.3 70B. Each message is a fresh, independent query — no memory.</p>
+      <div class="icon">&#9672;</div>
+      <h2>Welcome to ERA</h2>
+      <p>Your AI assistant powered by <strong>Groq</strong>. Each message is an independent query — fast, private, stateless.</p>
       <div class="suggestion-chips">
         <button class="chip" onclick="sendChip(this)">Explain quantum computing</button>
         <button class="chip" onclick="sendChip(this)">Write a Python function</button>
@@ -353,7 +358,7 @@
     </div>
     <div id="char-hint">0 / 2000</div>
     <div class="notice">
-      <span>⚡ No memory mode — every message is stateless</span>
+      <span>Stateless mode -- every message is independent</span>
     </div>
   </div>
 </div>
